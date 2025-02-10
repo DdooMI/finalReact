@@ -1,1 +1,4 @@
 @import "tailwindcss";
+#home {
+    background: url('./Assets/home.gif') no-repeat center center / cover;
+}
