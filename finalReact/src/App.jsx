@@ -1,22 +1,18 @@
-import About from "./Components/About"
+import { Route, Routes } from 'react-router-dom'
 import Footer from "./Components/Footer"
-import Hero from "./Components/Hero"
 import Nav from "./Components/Nav"
-import Product from "./Components/Product"
-import Services from "./Components/services"
-import Testimonials from "./Components/testimonials"
-
+import AboutPage from "./Pages/AboutPage"
+import IndexPage from "./Pages/IndexPage"
 
 function App() {
 
   return (
     <>
       <Nav/>
-      <Hero  title="Designing Spaces You&apos;ll Love" discr="Bringing harmony and elegance to your home interiors." />
-      <About/>
-      <Product/>
-      <Services/>
-      <Testimonials/>
+      <Routes>
+          <Route path='/' element={<IndexPage />} />
+          <Route path='/about' element={<AboutPage />} />
+        </Routes>
       <Footer/>
     </>
   )

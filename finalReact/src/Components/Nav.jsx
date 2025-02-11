@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from 'react-router-dom';
 
 function Nav() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -12,14 +13,11 @@ function Nav() {
                     </div>
                     <ul className="hidden md:flex space-x-6 text-lg font-medium">
                         <li>
-                            <a href="#home" className="hover:text-[#C19A6B] transition">
-                                Home
-                            </a>
+                        <NavLink to="/" className="hover:text-[#C19A6B] transition">Home</NavLink>  
                         </li>
                         <li>
-                            <a href="about.html" className="hover:text-[#C19A6B] transition">
-                                About
-                            </a>
+                        <NavLink to="/about" className="hover:text-[#C19A6B] transition">About</NavLink>  
+
                         </li>
                         <li>
                             <a href="#projects" className="hover:text-[#C19A6B] transition">

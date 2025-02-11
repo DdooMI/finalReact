@@ -18,7 +18,7 @@ function Hero(props) {
         href="#projects"
         className="mt-6 inline-block bg-[#C19A6B] hover:bg-[#A67B5B] text-white text-lg px-8 py-3 rounded-full transition"
       >
-        Explore Our Work
+        {props.btn}
       </a>
     </div>
   </section>

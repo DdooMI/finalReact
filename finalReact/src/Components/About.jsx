@@ -3,7 +3,7 @@
 function About() {
   return (
     <section
-  className="py-20 px-8 md:px-12 lg:px-24 bg-gray-100 even:bg-gray-300 text-center"
+  className="py-20 px-8 md:px-12 lg:px-24 bg-[#dddddd] even:bg-[#dddddd] text-center"
   id="about"
 >
   <h2 className="text-3xl  md:text-4xl font-playfair text-gray-800 mb-5">

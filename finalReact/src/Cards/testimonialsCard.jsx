@@ -11,10 +11,9 @@ function TestimonialsCard(props) {
     />
     <div>
       <p className="text-gray-600 text-lg leading-relaxed">
-        &quot;Harmony Interiors transformed our living space into a cozy haven.
-        Outstanding design and attention to detail!&quot;
+        {props.msg}
       </p>
-      <h4 className="text-gray-800 font-semibold mt-2">- Sarah L.</h4>
+      <h4 className="text-gray-800 font-semibold mt-2">- {props.actor}</h4>
     </div>
   </div>
   )
