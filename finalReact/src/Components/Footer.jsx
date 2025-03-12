@@ -40,12 +40,7 @@ function Footer() {
               <NavLink to="/about" className="text-[#ccc] no-underline hover:text-[#C19A6B] transition-colors duration-300">About</NavLink>
             </li>
             <li className="mb-[10px]">
-              <a
-                href="#projects"
-                className="text-[#ccc] no-underline hover:text-[#C19A6B] transition-colors duration-300"
-              >
-                Projects
-              </a>
+            <NavLink to="/projects" className="text-[#ccc] no-underline hover:text-[#C19A6B] transition-colors duration-300">Projects</NavLink>
             </li>
             <li className="mb-[10px]">
               <NavLink to="/services" className="text-[#ccc] no-underline hover:text-[#C19A6B] transition-colors duration-300">Services</NavLink>

@@ -3,30 +3,58 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../zustand/auth";
+import axiosApi from "../axios/axiosConfig";
 
 export default function ProfilePage() {
-    const { user,role, profile, updateProfile, logout } = useAuth();
-    const [editMode, setEditMode] = useState(false);
-    const [newName, setNewName] = useState(profile?.name || "");
-    const [newPhoto, setNewPhoto] = useState(null); // Stores the selected file
-    const [preview, setPreview] = useState(profile?.photoURL || "/person.gif");
-    const navigate = useNavigate();
-    // Handle file selection
-    const handleFileChange = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-        setNewPhoto(file);
-        setPreview(URL.createObjectURL(file));
-      }
-    };
-    const [activeTab, setActiveTab] = useState("all");
-    const handleSave = async () => {
-        const photoURL = newPhoto ? preview : profile?.photoURL || "/person.gif"; 
-      
-        await updateProfile({ name: newName, photoURL });
-      console.log(newPhoto);
+  const { user, role, profile, updateProfile, logout } = useAuth();
+  const [editMode, setEditMode] = useState(false);
+  const [newName, setNewName] = useState(profile?.name || "");
+  const [imageFile, setImageFile] = useState();
+  const [fileName, setFileName] = useState("Choose an image");
+  const navigate = useNavigate();
+
+
+  const handleFileChange =async (event) => {
+    
+    const file = event.target.files[0];
+    if (!file) return;
+    setImageFile(file);
+    setFileName(file.name);
+  };
+  const [activeTab, setActiveTab] = useState("all");
+  const handleSave = async () => {
+    try {
+      if (!imageFile && newName === profile.name) {
         setEditMode(false);
-      };
+        return;
+      }
+  
+      let uploadedImageUrl = profile.photoURL;
+  
+      if (imageFile) {
+        const imageData = new FormData();
+        imageData.append("file", imageFile);
+        imageData.append("upload_preset", "home_customization");
+        imageData.append("cloud_name", "dckwbkqjv");
+  
+        const res = await axiosApi.post(
+          "",
+          imageData
+        );
+  
+        uploadedImageUrl = res.data.secure_url;
+      }
+  
+      await updateProfile({ name: newName, photoURL: uploadedImageUrl });
+  
+      setEditMode(false);
+      setFileName("Choose an image");
+      setImageFile(null);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+  
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -52,7 +80,7 @@ export default function ProfilePage() {
                   />
                 </svg>
               </button>
-              <button className="text-gray-500 hover:text-gray-700" onClick={()=>{
+              <button className="text-gray-500 hover:text-gray-700" onClick={() => {
                 logout(navigate)
               }}>
                 <svg
@@ -87,48 +115,51 @@ export default function ProfilePage() {
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg">
               <img
-                src={preview}
+                src= { profile.photoURL ||'../../public/person.gif'}
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
             </div>
 
-            <div className="text-center md:text-left flex-1">
+            <div className="text-center md:text-left flex-1 ">
               {editMode ? (
-                <input
-                
+                <div className="flex flex-col gap-1 max-w-2xs"> <input
                   type="text"
-                  className="border px-2 py-1 rounded w"
+                  className="border px-2 py-1 rounded "
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
                 />
+                  <input
+                    type="file"
+                    id="fileInput"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleFileChange}
+                  />
+                  <label
+                    htmlFor="fileInput"
+                    className="border px-2 py-1 rounded cursor-pointer bg-gray-100 hover:bg-gray-200"
+                  >
+                    {fileName}
+                  </label>
+                </div>
+
               ) : (
                 <h1 className="text-3xl font-bold text-gray-900">{profile?.name}</h1>
               )}
               <p className="text-gray-600 text-lg">{user?.email}</p>
               <div className="mt-3">
-                  <span
-                    className={`inline-block px-4 py-1.5 rounded-full text-sm font-medium ${
-                      role === "designer"
-                        ? "bg-[#A67B5B]/10 text-[#A67B5B]"
-                        : "bg-[#A67B5B]/10 text-[#c1916d]"
+                <span
+                  className={`inline-block px-4 py-1.5 rounded-full text-sm font-medium ${role === "designer"
+                    ? "bg-[#A67B5B]/10 text-[#A67B5B]"
+                    : "bg-[#A67B5B]/10 text-[#c1916d]"
                     }`}
-                  >
-                    {role.charAt(0).toUpperCase() + role.slice(1)}
-                  </span>
-                </div>
+                >
+                  {role.charAt(0).toUpperCase() + role.slice(1)}
+                </span>
+              </div>
             </div>
-
-            {editMode && (
-              <input
-                type="file"
-                placeholder="choose Image"
-                accept="image/*"
-                className="border px-2 py-1 rounded w-30 mt-2"
-                onChange={handleFileChange}
-              />
-            )}
-
+            
             <div className=" flex flex-col sm:flex-row gap-3">
               {editMode ? (
                 <>
@@ -154,33 +185,31 @@ export default function ProfilePage() {
           <div className="border-b">
             <div className="px-6 py-4 flex">
               <button
-                className={`px-4 py-2 font-medium text-sm ${
-                  activeTab === "all"
-                    ? "border-b-2 border-[#A67B5B] text-[#A67B5B]"
-                    : "text-gray-500 hover:text-gray-700"
-                }`}
+                className={`px-4 py-2 font-medium text-sm ${activeTab === "all"
+                  ? "border-b-2 border-[#A67B5B] text-[#A67B5B]"
+                  : "text-gray-500 hover:text-gray-700"
+                  }`}
                 onClick={() => setActiveTab("all")}
               >
                 All Projects
               </button>
-            {role ==="designer"?  <button
-                className={`px-4 py-2 font-medium text-sm ${
-                  activeTab === "published"
-                    ? "border-b-2 border-[#A67B5B] text-[#A67B5B]"
-                    : "text-gray-500 hover:text-gray-700"
-                }`}
+              {role === "designer" ? <button
+                className={`px-4 py-2 font-medium text-sm ${activeTab === "published"
+                  ? "border-b-2 border-[#A67B5B] text-[#A67B5B]"
+                  : "text-gray-500 hover:text-gray-700"
+                  }`}
                 onClick={() => setActiveTab("published")}
               >
                 Published Projects
-              </button>:null}
+              </button> : null}
             </div>
           </div>
 
-          
+
         </div>
       </main>
 
-      
+
     </div>
   );
 }

@@ -34,7 +34,7 @@ function ServicePage() {
     return (
 
         <>
-            <Hero title={<><span>Designing Spaces You&apos;ll Love</span><br /><span className="text-2xl">Bringing harmony and elegance to your home interiors.
+            <Hero img="home" title={<><span>Designing Spaces You&apos;ll Love</span><br /><span className="text-2xl">Bringing harmony and elegance to your home interiors.
 
             </span></>} btn="Explore Our Work" />
             <ServiceCard />

@@ -84,7 +84,7 @@ export const useAuth = create((set, get) => ({
     }
   },
 
-  updateProfile: async (updatedProfile, navigation) => {
+  updateProfile: async (updatedProfile) => {
     try {
       const { user } = get();
       if (!user) throw new Error("User not logged in");
@@ -102,9 +102,7 @@ export const useAuth = create((set, get) => ({
       localStorage.setItem("profile", JSON.stringify(newProfile));
       set({ profile: newProfile });
 
-      if (navigation) {
-        navigation("/profile");
-      }
+      
     } catch (err) {
       set({ error: err.message });
     }

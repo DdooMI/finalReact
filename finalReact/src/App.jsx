@@ -8,6 +8,7 @@ import ServicePage from './Pages/ServicePage'
 import Login from './Pages/LoginPage'
 import Signup from './Pages/SignupPage'
 import ProfilePage from './Pages/ProfilePage'
+import ProjectsPage from './Pages/ProjectsPage'
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
       <Routes>
           <Route path='/' element={<IndexPage />} />
           <Route path='/about' element={<AboutPage />} />
+          <Route path='/projects' element={<ProjectsPage />} />
           <Route path='/services' element={<ServicePage />} />
           <Route path='/contact' element={<ContactPage />} />
           <Route path='/login' element={<Login />} />

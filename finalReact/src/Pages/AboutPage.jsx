@@ -4,7 +4,7 @@ import Hero from "../Components/Hero"
 function AboutPage() {
   return (
     <>
-    <Hero title={<><span>We will create modern and</span><br /><span>first-class interior.</span></>} btn="contact us" />
+    <Hero img="home" title={<><span>We will create modern and</span><br /><span>first-class interior.</span></>} btn="contact us" />
 
     <AboutContent />
     </>

@@ -8,7 +8,7 @@ import Testimonials from "../Components/testimonials"
 function IndexPage() {
     return (
         <>
-            <Hero title="Designing Spaces You&apos;ll Love" discr="Bringing harmony and elegance to your home interiors." btn="Explore Our Work" />
+            <Hero img="home" title="Designing Spaces You&apos;ll Love" discr="Bringing harmony and elegance to your home interiors." btn="Explore Our Work" />
             <About />
             <Product />
             <Services />

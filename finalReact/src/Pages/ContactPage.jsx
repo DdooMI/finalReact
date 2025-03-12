@@ -25,7 +25,7 @@ export default function ContactPage() {
 
     return (
         <>
-            <Hero title={<><span>Designing Spaces You&apos;ll Love</span><br /><span className="text-2xl">Bringing harmony and elegance to your home interiors.
+            <Hero img="home" title={<><span>Designing Spaces You&apos;ll Love</span><br /><span className="text-2xl">Bringing harmony and elegance to your home interiors.
 
             </span></>} btn="Contact us" />
             <div className="max-w-5xl mx-auto p-8">

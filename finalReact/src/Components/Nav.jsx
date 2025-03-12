@@ -19,7 +19,7 @@ function Nav() {
                     <ul className="hidden lg:flex space-x-6 text-lg font-medium">
                         <li><NavLink to="/" className="hover:text-[#C19A6B] transition">Home</NavLink></li>
                         <li><NavLink to="/about" className="hover:text-[#C19A6B] transition">About</NavLink></li>
-                        {user ? <li><a href="#projects" className="hover:text-[#C19A6B] transition">Projects</a></li> : null}
+                        {user ? <li><NavLink to="/projects" className="hover:text-[#C19A6B] transition">Projects</NavLink></li> : null}
                         <li><NavLink to="/services" className="hover:text-[#C19A6B] transition">Services</NavLink></li>
                         <li><NavLink to="/contact" className="hover:text-[#C19A6B] transition">Contact</NavLink></li>
                     </ul>
@@ -60,7 +60,7 @@ function Nav() {
             <div className={`${menuOpen ? 'flex' : 'hidden'} lg:hidden z-50 flex-col items-center space-y-4 text-lg font-medium text-center bg-white/90 py-4 shadow-md absolute top-[72px] left-0 w-full`}>
                 <NavLink to="/" className="hover:text-[#C19A6B] transition" onClick={() => setMenuOpen(!menuOpen)}>Home</NavLink>
                 <NavLink to="/about" className="hover:text-[#C19A6B] transition" onClick={() => setMenuOpen(!menuOpen)}>About</NavLink>
-                <a href="#projects" className="hover:text-[#C19A6B] transition" onClick={() => setMenuOpen(!menuOpen)}>Projects</a>
+                <NavLink to="/projects" className="hover:text-[#C19A6B] transition" onClick={() => setMenuOpen(!menuOpen)}>Projects</NavLink>
                 <NavLink to="/services" className="hover:text-[#C19A6B] transition" onClick={() => setMenuOpen(!menuOpen)}>Services</NavLink>
                 <NavLink to="/contact" className="hover:text-[#C19A6B] transition" onClick={() => setMenuOpen(!menuOpen)}>Contact</NavLink>
 
